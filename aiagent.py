@@ -40,7 +40,6 @@ class Agent:
             (dir_u and game.is_collision(point_u)) or
             (dir_d and game.is_collision(point_d)),
 
-            # Danger right
             (dir_u and game.is_collision(point_r)) or
             (dir_d and game.is_collision(point_l)) or
             (dir_l and game.is_collision(point_u)) or
@@ -65,11 +64,10 @@ class Agent:
         return np.array(state, dtype=int)
 
     def remember(self, state, action, reward, next_state, done):
-        self.memory.append((state, action, reward, next_state, done))  # popleft if MAX_MEMORY is reached
-
+        self.memory.append((state, action, reward, next_state, done))  
     def train_long_memory(self):
         if len(self.memory) > BATCH_SIZE:
-            mini_sample = random.sample(self.memory, BATCH_SIZE)  # list of tuples
+            mini_sample = random.sample(self.memory, BATCH_SIZE) 
         else:
             mini_sample = self.memory
 
